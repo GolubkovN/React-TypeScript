@@ -21,17 +21,17 @@ const TodoList: React.FC<TodoListProps> = ({todos, onComplete, onDelete}) => {
 
     return (
         <ul>
-            {todos.map((item) => {
+            {todos.map((item, i) => {
                  if (item.completed) {
                     classes.push('completed')
                 }
 
-               return <li className={classes.join(' ')} key={item.id}>
+               return <li className={classes.join(' ')} key={`item + ${i}`}>
                     <label>
                         <input 
                             type="checkbox"
                             checked={item.completed} 
-                            onChange={onComplete.bind(null, item.id)}
+                            onChange={() => onComplete(item.id)}
                         />
                         <span>{item.title}</span>
                         <i className="material-icons red-text" onClick={(evt) => removeHandler(evt, item.id)}>delete</i>

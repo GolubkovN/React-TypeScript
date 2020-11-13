@@ -4,7 +4,7 @@ const Navbar: React.FC = () => (
     <nav className="nav">
         <div className="nav-wrapper light-blue accent-3 px1">
             <a href="/" className="brand-logo">
-                React + typeScript
+                TodoApp
             </a>
             <ul className="right hide-on-med-and-down">
                 <li>

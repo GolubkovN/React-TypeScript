@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {ITodo} from '../../interfaces/todo';
 
@@ -9,6 +9,15 @@ import TododList from '../todoList/todoList';
 const App: React.FC = () => {
 
   const [todos, setTodos] = useState<ITodo[]>([]);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[]
+    setTodos(saved)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   const addhandler = (title: string) => {
     const newTodo: ITodo = {
@@ -21,10 +30,12 @@ const App: React.FC = () => {
 
   const completeHandler = (id: number) => {
     setTodos((prev) => prev.map((item) => {
-      return {
-        ...item,
-        completed: !item.completed
-      }      
+      if (item.id === id) {
+        item.completed = !item.completed
+      }     
+      console.log(item.id);
+      
+      return item
     }))
   };
 

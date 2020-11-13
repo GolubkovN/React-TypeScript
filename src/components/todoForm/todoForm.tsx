@@ -15,6 +15,12 @@ const TodoForm: React.FC<TodoFormProps> = (props) => {
         }
     }
 
+    const onBntlickHandler = (evt: React.MouseEvent) => {
+        evt.preventDefault();
+        props.onAdd(ref.current!.value);
+        ref.current!.value = "";
+    };
+
     return(
         <div className="input-field mt2">
             <input 
@@ -27,6 +33,10 @@ const TodoForm: React.FC<TodoFormProps> = (props) => {
             <label className="active" htmlFor="title">
                 Введите название дела
             </label>
+            <a href="/" 
+                className="waves-effect waves-light btn-large"
+                onClick={onBntlickHandler}
+            >Добавить<i className="material-icons right">add</i></a>
         </div>
     );
 };
